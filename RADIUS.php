@@ -46,6 +46,8 @@ require_once 'PEAR.php';
 * @version $Revision$
 */
 
+PEAR::loadExtension('radius');
+
 /**
  * class Auth_RADIUS
  *
@@ -119,7 +121,6 @@ class Auth_RADIUS extends PEAR {
     function Auth_RADIUS() 
     {
         $this->PEAR();
-        $this->loadExtension('radius');
     }
     
     /**
@@ -179,7 +180,7 @@ class Auth_RADIUS extends PEAR {
         if ($type == null) {
             $type = gettype($value);
         }
-        
+
         switch ($type) {
         case 'integer':
             return radius_put_int($this->res, $attrib, $value);
@@ -191,7 +192,7 @@ class Auth_RADIUS extends PEAR {
         default:
             return radius_put_attr($this->res, $attrib, $value);
         }
-        
+
     }
     
     /**
@@ -624,7 +625,7 @@ class Auth_RADIUS_PAP extends Auth_RADIUS
  * 
  * @package Auth_RADIUS 
  */
-class Auth_RADIUS_CHAP_MD5 extends Auth_RADIUS_PAP 
+class Auth_RADIUS_CHAP_MD5 extends Auth_RADIUS_PAP
 {
     /**
      * 8 Bytes binary challenge
@@ -661,7 +662,7 @@ class Auth_RADIUS_CHAP_MD5 extends Auth_RADIUS_PAP
     }
     
     /**
-     * Put CHAP-MD5 specific attributes 
+     * Put CHAP-MD5 specific attributes
      *
      * For authenticating using CHAP-MD5 via RADIUS you have to put the challenge 
      * and the response. The chapid is inserted in the first byte of the response.
@@ -948,17 +949,37 @@ class Auth_RADIUS_Acct_Start extends Auth_RADIUS_Acct
  * class Auth_RADIUS_Acct_Start
  *
  * Class for RADIUS accounting. Its usualy used, after the user has logged out.
- * 
+ *
  * @package Auth_RADIUS
  */
-class Auth_RADIUS_Acct_Stop extends Auth_RADIUS_Acct 
+class Auth_RADIUS_Acct_Stop extends Auth_RADIUS_Acct
 {
    /**
      * Defines the type of the accounting request.
      * It is set to RADIUS_STOP by default in this class.
      * @var  integer
-     */    
+     */
     var $status_type = RADIUS_STOP;
+}
+
+if (!defined('RADIUS_UPDATE'))
+    define('RADIUS_UPDATE', 3);
+
+/**
+ * class Auth_RADIUS_Acct_Update
+ *
+ * Class for interim RADIUS accounting updates.
+ *
+ * @package Auth_RADIUS
+ */
+class Auth_RADIUS_Acct_Update extends Auth_RADIUS_Acct
+{
+   /**
+     * Defines the type of the accounting request.
+     * It is set to RADIUS_UPDATE by default in this class.
+     * @var  integer
+     */
+    var $status_type = RADIUS_UPDATE;
 }
 
 ?>

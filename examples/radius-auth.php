@@ -43,8 +43,8 @@ if ($argv[1] == 'pearcvs') {
 }
 
 //$type = 'PAP';
-$type = 'CHAP_MD5';
-//$type = 'MSCHAPv1';
+//$type = 'CHAP_MD5';
+$type = 'MSCHAPv1';
 //$type = 'MSCHAPv2';
 
 $username = 'sepp';
@@ -59,7 +59,7 @@ $rauth->username = $username;
 switch($type) {
 case 'CHAP_MD5':
 case 'MSCHAPv1':
-    $classname = 'Crypt_' . $type;
+    $classname = $type == 'MSCHAPv1' ? 'Crypt_CHAP_MSv1' : 'Crypt_CHAP_MD5';
     $crpt = new $classname;
     $crpt->password = $password;
     $rauth->challenge = $crpt->challenge;
@@ -72,7 +72,7 @@ case 'MSCHAPv1':
     break;
   
 case 'MSCHAPv2':
-    $crpt = new Crypt_MSCHAPv2;
+    $crpt = new Crypt_CHAP_MSv2;
     $crpt->username = $username;
     $crpt->password = $password;
     $rauth->challenge = $crpt->authChallenge;
