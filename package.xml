@@ -20,13 +20,12 @@ If you are using MS-CHAP you need also the mhash and mcrypt extension.
   <license>BSD</license>
 
   <release>
-      <version>1.0.3</version>
-      <date>2004-03-25</date>
+      <version>1.0.4</version>
+      <date>2004-03-30</date>
       <state>stable</state>
       <notes>
 <![CDATA[
-* Changed the examples for version 1.0.0 of Crypt_CHAP
-* Added a new class for sending interim accounting updates
+* BugFix: wrong dependencies
 ]]>
       </notes>
 
@@ -42,10 +41,21 @@ If you are using MS-CHAP you need also the mhash and mcrypt extension.
   </release>   
 
   <deps>
-    <dep type="pkg" rel="ge" version="1.4">radius</dep>
+    <dep type="pkg" rel="ge" version="1.2.4">radius</dep>
   </deps> 
 
   <changelog>
+    <release>
+      <version>1.0.4</version>
+      <date>2004-03-30</date>
+      <state>stable</state>
+      <notes>
+<![CDATA[
+* BugFix: wrong dependencies
+]]>
+      </notes>
+    </release>
+
     <release>
       <version>1.0.3</version>
       <date>2004-03-25</date>
