@@ -269,12 +269,10 @@ class Auth_RADIUS extends PEAR {
         }
                 
         $this->putAttribute(RADIUS_NAS_IDENTIFIER, isset($var['HTTP_HOST']) ? $var['HTTP_HOST'] : 'localhost');
+        $this->putAttribute(RADIUS_NAS_PORT_TYPE, RADIUS_VIRTUAL);
         $this->putAttribute(RADIUS_SERVICE_TYPE, RADIUS_FRAMED);
         $this->putAttribute(RADIUS_FRAMED_PROTOCOL, RADIUS_PPP);
         $this->putAttribute(RADIUS_CALLING_STATION_ID, isset($var['REMOTE_HOST']) ? $var['REMOTE_HOST'] : '127.0.0.1');
-        if (isset($this->username)) {
-            $this->putAttribute(RADIUS_USER_NAME, $this->username);        
-        }
     }
     
     /**

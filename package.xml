@@ -19,22 +19,24 @@ If you are using MS-CHAP you need also the mhash extension.
   
   <release>
     <version>1.0.1</version>
-    <date>2003-02-15</date>
-    <license>BSD</license>
+    <date>2003-05-02</date>
     <state>stable</state>
     <notes>
 <![CDATA[
 * Added support for LAN-Manager-Responses
+* BugFix: The RADIUS_USER_NAME was sent twice
+* Send also the RADIUS_NAS_PORT_TYPE
 ]]>
     </notes>
+
     <filelist>
       <dir name="/" baseinstalldir="Auth">
-        <file role="php" name="RADIUS.php"/>
-        <dir name="examples" role="doc">
-          <file name="radius-acct.php"/>
-          <file name="radius-auth.php"/>
-        </dir>
+      <file role="php" name="RADIUS.php"/>
+      <dir name="examples" role="doc">
+        <file name="radius-acct.php"/>
+        <file name="radius-auth.php"/>
       </dir>
+    </dir>
     </filelist>
     <deps>
         <dep type="pkg" rel="ge" version="1.2">radius</dep>
@@ -44,11 +46,13 @@ If you are using MS-CHAP you need also the mhash extension.
   <changelog>
     <release>
       <version>1.0.1</version>
-      <date>2003-02-15</date>
+      <date>2003-05-02</date>
       <state>stable</state>
       <notes>
 <![CDATA[
 * Added support for LAN-Manager-Responses
+* BugFix: The RADIUS_USER_NAME was sent twice
+* Send also the RADIUS_NAS_PORT_TYPE
 ]]>
       </notes>
     </release>
@@ -56,7 +60,7 @@ If you are using MS-CHAP you need also the mhash extension.
     
   <changelog>
     <release>
-      <version>1.0.1</version>
+      <version>1.0.0</version>
       <date>2003-02-01</date>
       <state>stable</state>
       <notes>

@@ -43,8 +43,8 @@ if ($argv[1] == 'pearcvs') {
 }
 
 //$type = 'PAP';
-//$type = 'CHAP_MD5';
-$type = 'MSCHAPv1';
+$type = 'CHAP_MD5';
+//$type = 'MSCHAPv1';
 //$type = 'MSCHAPv2';
 
 $username = 'sepp';
