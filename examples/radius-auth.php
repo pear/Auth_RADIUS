@@ -34,7 +34,7 @@ any other GPL-like (LGPL, GPL2) License.
 */
 
 require_once 'Auth_RADIUS/RADIUS.php';
-require_once 'Crypt_CHAP/CHAP.php';
+require_once 'Crypt/CHAP.php';
 
 $type = 'PAP';
 //$type = 'CHAP_MD5';
