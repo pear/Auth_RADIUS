@@ -40,10 +40,11 @@ If you are using MS-CHAP you need also the mhash extension.
       </dir>
     </dir>
     </filelist>
-    <deps>
-        <dep type="pkg" rel="ge" version="1.2">radius</dep>
-    </deps>    
   </release>   
+
+  <deps>
+    <dep type="pkg" rel="ge" version="1.2">radius</dep>
+  </deps> 
 
   <changelog>
     <release>
