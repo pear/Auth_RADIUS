@@ -711,6 +711,19 @@ class Auth_RADIUS_CHAP_MD5 extends Auth_RADIUS_PAP
 class Auth_RADIUS_MSCHAPv1 extends Auth_RADIUS_CHAP_MD5 
 {
     /**
+     * LAN-Manager-Response
+     * @var  string
+     */
+    var $lmResponse = null;
+
+    /**
+     * Wether using deprecated LM-Responses or not.
+     * 0 = use LM-Response, 1 = use NT-Response
+     * @var  bool
+     */
+    var $flags = 1;
+    
+    /**
      * Put MS-CHAPv1 specific attributes 
      *
      * For authenticating using MS-CHAPv1 via RADIUS you have to put the challenge 
@@ -721,7 +734,7 @@ class Auth_RADIUS_MSCHAPv1 extends Auth_RADIUS_CHAP_MD5
      *   u_char lm_response[24];
      *   u_char response[24];
      * };
-     * We provide no insecure LAN-Manager response, therefore we set the flags to 1.
+     * 
      * @return void
      */
     function putAuthAttributes()
@@ -729,11 +742,10 @@ class Auth_RADIUS_MSCHAPv1 extends Auth_RADIUS_CHAP_MD5
         if (isset($this->username)) {
             $this->putAttribute(RADIUS_USER_NAME, $this->username);        
         }
-        if (isset($this->response)) {
-            // We don't provide insecure LAN Manager hashes
-            $lmresp = str_repeat ("\0", 24);
-            // Response: chapid, flags (1 = use NT Response), LM Response, NT Response
-            $resp = pack('CCa24',$this->chapid , 1, $lmresp) . $this->response;
+        if (isset($this->response) || isset($this->lmResponse)) {
+            $lmResp = isset($this->lmResponse) ? $this->lmResponse : str_repeat ("\0", 24);
+            $ntResp = isset($this->response)   ? $this->response :   str_repeat ("\0", 24);
+            $resp = pack('CC', $this->chapid, $this->flags) . $lmResp . $ntResp;
             $this->putVendorAttribute(RADIUS_VENDOR_MICROSOFT, RADIUS_MICROSOFT_MS_CHAP_RESPONSE, $resp);
         }
         if (isset($this->challenge)) {        

@@ -33,12 +33,18 @@ any other GPL-like (LGPL, GPL2) License.
     $Id$
 */
 
-require_once 'Auth/RADIUS.php';
-require_once 'Crypt/CHAP.php';
+if ($argv[1] == 'pearcvs') {
+    ini_set('include_path', '..:../..:' . ini_get('include_path'));
+    require_once 'RADIUS.php';
+    require_once 'Crypt_CHAP/CHAP.php';
+} else {
+    require_once 'Auth/RADIUS.php';
+    require_once 'Crypt/CHAP.php';
+}
 
-$type = 'PAP';
+//$type = 'PAP';
 //$type = 'CHAP_MD5';
-//$type = 'MSCHAPv1';
+$type = 'MSCHAPv1';
 //$type = 'MSCHAPv2';
 
 $username = 'sepp';
@@ -59,6 +65,10 @@ case 'MSCHAPv1':
     $rauth->challenge = $crpt->challenge;
     $rauth->chapid = $crpt->chapid;
     $rauth->response = $crpt->challengeResponse();
+    $rauth->flags = 1;
+// If you must use deprecated and weak LAN-Manager-Responses use this:
+//    $rauth->lmResponse = $crpt->lmChallengeResponse();
+//    $rauth->flags = 0;
     break;
   
 case 'MSCHAPv2':

@@ -18,13 +18,13 @@ If you are using MS-CHAP you need also the mhash extension.
   </maintainers>
   
   <release>
-    <version>1.0</version>
-    <date>2003-02-01</date>
+    <version>1.0.1</version>
+    <date>2003-02-15</date>
     <license>BSD</license>
     <state>stable</state>
     <notes>
 <![CDATA[
-* Fully functional and reasonably tested
+* Added support for LAN-Manager-Responses
 ]]>
     </notes>
     <filelist>
@@ -40,10 +40,23 @@ If you are using MS-CHAP you need also the mhash extension.
         <dep type="pkg" rel="ge" version="1.2">radius</dep>
     </deps>    
   </release>   
-  
+
   <changelog>
     <release>
-      <version>1.0</version>
+      <version>1.0.1</version>
+      <date>2003-02-15</date>
+      <state>stable</state>
+      <notes>
+<![CDATA[
+* Added support for LAN-Manager-Responses
+]]>
+      </notes>
+    </release>
+  </changelog>
+    
+  <changelog>
+    <release>
+      <version>1.0.1</version>
       <date>2003-02-01</date>
       <state>stable</state>
       <notes>
