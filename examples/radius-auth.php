@@ -33,7 +33,7 @@ any other GPL-like (LGPL, GPL2) License.
     $Id$
 */
 
-require_once 'Auth_RADIUS/RADIUS.php';
+require_once 'Auth/RADIUS.php';
 require_once 'Crypt/CHAP.php';
 
 $type = 'PAP';

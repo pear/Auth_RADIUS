@@ -43,7 +43,7 @@ if(!extension_loaded('radius')) {
 
 }
 
-require_once "Auth_RADIUS/RADIUS.php";
+require_once "Auth/RADIUS.php";
 
 $username = 'sepp';
 
