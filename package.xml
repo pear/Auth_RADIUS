@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<package version="1.0">
+  <name>Auth_RADIUS</name>
+  <summary>Wrapper Classes for the RADIUS PECL.</summary>
+  <description>This package provides Classes wich wrapps the RADIUS PECL.
+There are different Classes for the different authentication methods.
+If you are using CHAP-MD5 or MS-CHAP you need also the Crypt_CHAP package.
+If you are using MS-CHAP you need also the mhash extension.
+</description>
+
+  <maintainers>
+    <maintainer>
+      <user>mbretter</user>
+      <name>Michael Bretterklieber</name>
+      <email>mbretter@php.net</email>
+      <role>lead</role>
+    </maintainer>
+  </maintainers>
+  
+  <release>
+    <version>1.0</version>
+    <date>2003-02-01</date>
+    <license>BSD</license>
+    <state>stable</state>
+    <notes>
+<![CDATA[
+* Fully functional and reasonably tested
+]]>
+    </notes>
+    <filelist>
+      <dir name="/" baseinstalldir="Auth_RADIUS">
+        <file role="php" name="RADIUS.php"/>
+        <dir name="examples">
+          <file role="php" name="radius-acct.php"/>
+          <file role="php" name="radius-auth.php"/>
+        </dir>
+      </dir>
+    </filelist>
+    <deps>
+        <dep type="pkg" rel="ge" version="1.2">radius</dep>
+    </deps>    
+  </release>   
+  
+  <changelog>
+    <release>
+      <version>1.0</version>
+      <date>2003-02-01</date>
+      <state>stable</state>
+      <notes>
+<![CDATA[
+* Fully functional and reasonably tested
+]]>
+      </notes>
+    </release>
+  </changelog>
+
+</package>
