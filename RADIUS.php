@@ -392,10 +392,10 @@ class Auth_RADIUS extends PEAR {
     /**
      * Reads all received attributes after sending the request.
      *
-     * This methos stores know attributes in the property attributes, 
+     * This methos stores known attributes in the property attributes, 
      * all attributes (including known attibutes) are stored in rawAttributes 
      * or rawVendorAttributes.
-     * NOTE: call this functio also even if the request was rejected, because the 
+     * NOTE: call this function also even if the request was rejected, because the 
      * Server returns usualy an errormessage
      *
      * @access public
@@ -458,6 +458,10 @@ class Auth_RADIUS extends PEAR {
 
             case RADIUS_FILTER_ID:
                 $this->attributes['filter_id'] = radius_cvt_string($data);
+                break;
+
+            case RADIUS_REPLY_MESSAGE:
+                $this->attributes['reply_message'] = radius_cvt_string($data);
                 break;
 
             case RADIUS_VENDOR_SPECIFIC:
