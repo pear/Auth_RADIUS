@@ -20,14 +20,12 @@ If you are using MS-CHAP you need also the mhash extension.
   <license>BSD</license>
 
   <release>
-    <version>1.0.1</version>
-    <date>2003-05-02</date>
+    <version>1.0.2</version>
+    <date>2003-07-17</date>
     <state>stable</state>
     <notes>
 <![CDATA[
-* Added support for LAN-Manager-Responses
-* BugFix: The RADIUS_USER_NAME was sent twice
-* Send also the RADIUS_NAS_PORT_TYPE
+* BugFix: wrong status_type in Auth_RADIUS_Acct_Start
 ]]>
     </notes>
 
@@ -48,6 +46,17 @@ If you are using MS-CHAP you need also the mhash extension.
 
   <changelog>
     <release>
+      <version>1.0.2</version>
+      <date>2003-07-17</date>
+      <state>stable</state>
+      <notes>
+<![CDATA[
+* BugFix: wrong status_type in Auth_RADIUS_Acct_Start
+]]>
+      </notes>
+    </release>
+  
+     <release>
       <version>1.0.1</version>
       <date>2003-05-02</date>
       <state>stable</state>
@@ -59,9 +68,7 @@ If you are using MS-CHAP you need also the mhash extension.
 ]]>
       </notes>
     </release>
-  </changelog>
-    
-  <changelog>
+  
     <release>
       <version>1.0.0</version>
       <date>2003-02-01</date>
