@@ -28,11 +28,11 @@ If you are using MS-CHAP you need also the mhash extension.
 ]]>
     </notes>
     <filelist>
-      <dir name="/" baseinstalldir="Auth_RADIUS">
+      <dir name="/" baseinstalldir="Auth">
         <file role="php" name="RADIUS.php"/>
-        <dir name="examples" role="example">
-          <file role="php" name="radius-acct.php"/>
-          <file role="php" name="radius-auth.php"/>
+        <dir name="examples" role="doc">
+          <file name="radius-acct.php"/>
+          <file name="radius-auth.php"/>
         </dir>
       </dir>
     </filelist>
