@@ -941,7 +941,7 @@ class Auth_RADIUS_Acct_Start extends Auth_RADIUS_Acct
      * It is set to RADIUS_START by default in this class.
      * @var  integer
      */    
-    var $status_type = Auth_RADIUS_Acct_Stop;
+    var $status_type = RADIUS_START;
 }
 
 /**
