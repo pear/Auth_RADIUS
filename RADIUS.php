@@ -183,6 +183,7 @@ class Auth_RADIUS extends PEAR {
 
         switch ($type) {
         case 'integer':
+        case 'double':
             return radius_put_int($this->res, $attrib, $value);
         
         case 'addr':
@@ -214,6 +215,7 @@ class Auth_RADIUS extends PEAR {
         
         switch ($type) {
         case 'integer':
+        case 'double':
             return radius_put_vendor_int($this->res, $vendor, $attrib, $value);
         
         case 'addr':
@@ -392,7 +394,7 @@ class Auth_RADIUS extends PEAR {
     /**
      * Reads all received attributes after sending the request.
      *
-     * This methos stores known attributes in the property attributes, 
+     * This methods stores known attributes in the property attributes, 
      * all attributes (including known attibutes) are stored in rawAttributes 
      * or rawVendorAttributes.
      * NOTE: call this function also even if the request was rejected, because the 
