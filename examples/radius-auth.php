@@ -53,7 +53,9 @@ $password = 'sepp';
 $classname = 'Auth_RADIUS_' . $type;
 $rauth = new $classname($username, $password);
 $rauth->addServer('localhost', 0, 'testing123');
-$rauth->setConfigfile('/etc/radius.conf');
+//$rauth->setConfigfile('/etc/radius.conf');
+// turn of standard attributes
+//$rauth->useStandardAttributes = false;
 $rauth->username = $username;
 
 switch($type) {
@@ -90,6 +92,7 @@ if (!$rauth->start()) {
     printf("Radius start: %s<br>\n", $rauth->getError());
     exit;
 }
+
 
 $result = $rauth->send();
 if (PEAR::isError($result)) {

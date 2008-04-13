@@ -110,6 +110,13 @@ class Auth_RADIUS extends PEAR {
      * @see  dumpAttributes(), getAttributes()
      */
     var $rawVendorAttributes = array();    
+
+    /**
+     * Switch whether we should put standard attributes or not
+     * @var  bool
+     * @see  putStandardAttributes()
+     */
+    var $useStandardAttributes = true;
     
     /**
      * Constructor
@@ -265,6 +272,9 @@ class Auth_RADIUS extends PEAR {
      */ 
     function putStandardAttributes()
     {
+        if (!$this->useStandardAttributes)
+		return;
+
         if (isset($_SERVER)) {
             $var = &$_SERVER;
         } else {

@@ -46,7 +46,7 @@ $username = 'sepp';
 $starttime = time();
 
 $racct = new Auth_RADIUS_Acct_Start;
-$racct->addServer('localhost', 0, 'testing123');
+$racct->addServer('127.0.0.1', 0, 'testing123');
 $racct->username = $username;
 // RADIUS_AUTH_RADIUS => authenticated via Radius
 // RADIUS_AUTH_LOCAL => authenicated local
@@ -59,7 +59,7 @@ if(PEAR::isError($status)) {
 }
 // you can put any additional attributes here
 // $racct->putAttribute(RADIUS_ACCT_INPUT_PACKETS, 45236);
-// $racct->putAttribute(RADIUS_ACCT_OUTPUT_PACKETS, 1212);
+$racct->putAttribute(RADIUS_ACCT_OUTPUT_PACKETS, pow(2,32)-1);
 $result = $racct->send();
 if (PEAR::isError($result)) {
     printf("Radius send failed: %s<br>\n", $result->getMessage());
