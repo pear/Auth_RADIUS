@@ -290,9 +290,9 @@ class Auth_RADIUS {
         }
 
         if (isset($_SERVER)) {
-            $var = &$_SERVER;
+            $var = $_SERVER;
         } else {
-            $var = &$GLOBALS['HTTP_SERVER_VARS'];
+            $var = $GLOBALS['HTTP_SERVER_VARS'];
         }
                 
         $this->putAttribute(RADIUS_NAS_IDENTIFIER, isset($var['HTTP_HOST']) ? $var['HTTP_HOST'] : 'localhost');
@@ -885,9 +885,9 @@ class Auth_RADIUS_Acct extends Auth_RADIUS
         parent::__construct();
         
         if (isset($_SERVER)) {
-            $var = &$_SERVER;
+            $var = $_SERVER;
         } else {
-            $var = &$GLOBALS['HTTP_SERVER_VARS'];
+            $var = $GLOBALS['HTTP_SERVER_VARS'];
         }
 
         $this->session_id = sprintf("%s:%d-%s", isset($var['REMOTE_ADDR']) ? $var['REMOTE_ADDR'] : '127.0.0.1' , getmypid(), get_current_user());
