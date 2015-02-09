@@ -404,7 +404,7 @@ class Auth_RADIUS {
             return true;
 
         default:
-            throw new Exception("Unexpected return value: $req");
+            throw new Auth_RADIUS_Exception("Unexpected return value: $req");
         }    
         
     }
