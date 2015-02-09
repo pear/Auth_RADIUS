@@ -32,7 +32,7 @@ Req #13160 start() is inflexible - mbretter
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
-   <file baseinstalldir="/" md5sum="1c3043b041a76b926d0ad16a1a70d269" name="Auth/RADIUS.php" role="php" />
+   <file baseinstalldir="/" md5sum="1937b1c2960f72abd697ec73f49c2e87" name="Auth/RADIUS.php" role="php" />
    <file baseinstalldir="/" md5sum="7a7c73a90c81aca7cd2bd1ff60715e55" name="examples/radius-acct.php" role="doc" />
    <file baseinstalldir="/" md5sum="300ad05ac5424aa85eec280bea0f7936" name="examples/radius-auth.php" role="doc" />
   </dir>
@@ -157,7 +157,7 @@ Req #13160 start() is inflexible - mbretter
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2010-10-25</date>
+   <date>2015-02-10</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
    <notes>
 Automatically built QA release
