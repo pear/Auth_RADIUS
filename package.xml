@@ -31,10 +31,10 @@ Bug #11541 Dependency problem - mbretter
 Req #13160 start() is inflexible - mbretter
  </notes>
  <contents>
-  <dir baseinstalldir="Auth" name="/">
-   <file baseinstalldir="Auth" md5sum="26a98ead1f3599095411ead059ad3f87" name="examples/radius-acct.php" role="doc" />
-   <file baseinstalldir="Auth" md5sum="f1e2b16f88b5bf6497f4a198dee01432" name="examples/radius-auth.php" role="doc" />
-   <file baseinstalldir="Auth" md5sum="e2d408b4a84e843f50f2a29b482d1542" name="RADIUS.php" role="php" />
+  <dir baseinstalldir="/" name="/">
+   <file baseinstalldir="/" md5sum="1c3043b041a76b926d0ad16a1a70d269" name="Auth/RADIUS.php" role="php" />
+   <file baseinstalldir="/" md5sum="7a7c73a90c81aca7cd2bd1ff60715e55" name="examples/radius-acct.php" role="doc" />
+   <file baseinstalldir="/" md5sum="300ad05ac5424aa85eec280bea0f7936" name="examples/radius-auth.php" role="doc" />
   </dir>
  </contents>
  <dependencies>
