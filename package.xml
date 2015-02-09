@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.9.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.9.4" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
  <name>Auth_RADIUS</name>
  <channel>pear.php.net</channel>
  <summary>Wrapper Classes for the RADIUS PECL.</summary>
@@ -13,11 +13,11 @@ If you are using MS-CHAP you need also the mhash and mcrypt extension.</descript
   <email>mbretter@php.net</email>
   <active>yes</active>
  </lead>
- <date>2010-10-25</date>
- <time>23:18:44</time>
+ <date>2015-02-10</date>
+ <time>09:55:30</time>
  <version>
-  <release>1.0.7</release>
-  <api>1.0.6</api>
+  <release>1.1.0</release>
+  <api>1.1.0</api>
  </version>
  <stability>
   <release>stable</release>
@@ -25,10 +25,10 @@ If you are using MS-CHAP you need also the mhash and mcrypt extension.</descript
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
  <notes>
-Automatically built QA release
-Bug #11541 Dependency problem - mbretter
-
-Req #13160 start() is inflexible - mbretter
+QA release
+Drop php4
+Introduce exceptions
+Drop PEAR
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -40,7 +40,7 @@ Req #13160 start() is inflexible - mbretter
  <dependencies>
   <required>
    <php>
-    <min>4.0.0</min>
+    <min>5.0.0</min>
    </php>
    <pearinstaller>
     <min>1.4.0b1</min>
@@ -164,6 +164,24 @@ Automatically built QA release
 Bug #11541 Dependency problem - mbretter
 
 Req #13160 start() is inflexible - mbretter
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.1.0</release>
+    <api>1.1.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2015-02-10</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD</license>
+   <notes>
+QA release
+Drop php4
+Introduce exceptions
+Drop PEAR
    </notes>
   </release>
  </changelog>
