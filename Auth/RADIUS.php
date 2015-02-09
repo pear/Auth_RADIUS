@@ -33,8 +33,6 @@ any other GPL-like (LGPL, GPL2) License.
     $Id$
 */
 
-require_once 'PEAR.php';
-
 /**
 * Client implementation of RADIUS. This are wrapper classes for
 * the RADIUS PECL. 
@@ -46,7 +44,6 @@ require_once 'PEAR.php';
 * @version $Revision$
 */
 
-PEAR::loadExtension('radius');
 
 /**
  * class Auth_RADIUS
@@ -55,7 +52,7 @@ PEAR::loadExtension('radius');
  *
  * @package Auth_RADIUS 
  */
-class Auth_RADIUS extends PEAR {
+class Auth_RADIUS {
 
     /**
      * List of RADIUS servers.
@@ -125,11 +122,39 @@ class Auth_RADIUS extends PEAR {
      *
      * @return void
      */
-    function Auth_RADIUS() 
+    public function __construct()
     {
-        $this->PEAR();
+        $this->loadExtension('radius');
     }
     
+    /**
+     */
+    protected function loadExtension($ext) {
+        if (extension_loaded($ext)) {
+            return true;
+        }
+        // if either returns true dl() will produce a FATAL error, stop that
+        if (
+            function_exists('dl') === false ||
+            ini_get('enable_dl') != 1 ||
+            ini_get('safe_mode') == 1
+        ) {
+            return false;
+        }
+        if (OS_WINDOWS) {
+            $suffix = '.dll';
+        } elseif (PHP_OS == 'HP-UX') {
+            $suffix = '.sl';
+        } elseif (PHP_OS == 'AIX') {
+            $suffix = '.a';
+        } elseif (PHP_OS == 'OSX') {
+            $suffix = '.bundle';
+        } else {
+            $suffix = '.so';
+        }
+        return @dl('php_'.$ext.$suffix) || @dl($ext.$suffix);
+    }
+
     /**
      * Adds a RADIUS server to the list of servers for requests.
      *
@@ -137,7 +162,6 @@ class Auth_RADIUS extends PEAR {
      * are given, they are tried in round-robin fashion until a 
      * valid response is received
      *
-     * @access public
      * @param  string  $servername   Servername or IP-Address
      * @param  integer $port         Portnumber
      * @param  string  $sharedSecret Shared secret
@@ -145,7 +169,7 @@ class Auth_RADIUS extends PEAR {
      * @param  integer $maxtries     Max. retries for each request          
      * @return void
      */
-    function addServer($servername = 'localhost', $port = 0, $sharedSecret = 'testing123', $timeout = 3, $maxtries = 3) 
+    public function addServer($servername = 'localhost', $port = 0, $sharedSecret = 'testing123', $timeout = 3, $maxtries = 3) 
     {
         $this->_servers[] = array($servername, $port, $sharedSecret, $timeout, $maxtries);    
     }
@@ -153,10 +177,9 @@ class Auth_RADIUS extends PEAR {
     /**
      * Returns an error message, if an error occurred.
      *
-     * @access public
      * @return string
      */
-    function getError() 
+    public function getError()
     {
         return radius_strerror($this->res);
     }
@@ -164,11 +187,10 @@ class Auth_RADIUS extends PEAR {
     /**
      * Sets the configuration-file.
      *
-     * @access public
      * @param  string  $file Path to the configuration file    
      * @return void
      */    
-    function setConfigfile($file) 
+    public function setConfigfile($file)
     {
         $this->_configfile = $file;
     }
@@ -176,13 +198,12 @@ class Auth_RADIUS extends PEAR {
     /**
      * Puts an attribute.
      *
-     * @access public
      * @param  integer $attrib       Attribute-number
      * @param  mixed   $port         Attribute-value
      * @param  type    $type         Attribute-type
      * @return bool  true on success, false on error
      */    
-    function putAttribute($attrib, $value, $type = null) 
+    public function putAttribute($attrib, $value, $type = null)
     {
         if ($type == null) {
             $type = gettype($value);
@@ -206,14 +227,13 @@ class Auth_RADIUS extends PEAR {
     /**
      * Puts a vendor-specific attribute.
      *
-     * @access public
      * @param  integer $vendor       Vendor (MSoft, Cisco, ...)
      * @param  integer $attrib       Attribute-number
      * @param  mixed   $port         Attribute-value
      * @param  type    $type         Attribute-type
      * @return bool  true on success, false on error
      */ 
-    function putVendorAttribute($vendor, $attrib, $value, $type = null) 
+    public function putVendorAttribute($vendor, $attrib, $value, $type = null)
     {
         
         if ($type == null) {
@@ -238,9 +258,8 @@ class Auth_RADIUS extends PEAR {
     /**
      * Prints known attributes received from the server.
      *
-     * @access public
      */     
-    function dumpAttributes()
+    public function dumpAttributes()
     {
         foreach ($this->attributes as $name => $data) {
             echo "$name:$data<br>\n";
@@ -249,31 +268,26 @@ class Auth_RADIUS extends PEAR {
     
     /**
      * Overwrite this. 
-     *
-     * @access public
      */         
-    function open() 
+    public function open()
     {
     }
 
     /**
      * Overwrite this.
-     *
-     * @access public
      */         
-    function createRequest()
+    public function createRequest()
     {
     }
     
     /**
      * Puts standard attributes.
-     *
-     * @access public
      */ 
-    function putStandardAttributes()
+    public function putStandardAttributes()
     {
-        if (!$this->useStandardAttributes)
-		return;
+        if (!$this->useStandardAttributes) {
+		    return;
+        }
 
         if (isset($_SERVER)) {
             $var = &$_SERVER;
@@ -290,10 +304,8 @@ class Auth_RADIUS extends PEAR {
     
     /**
      * Puts custom attributes.
-     *
-     * @access public
      */ 
-    function putAuthAttributes()
+    public function putAuthAttributes()
     {
         if (isset($this->username)) {
             $this->putAttribute(RADIUS_USER_NAME, $this->username);        
@@ -303,7 +315,6 @@ class Auth_RADIUS extends PEAR {
     /**
      * Configures the radius library.
      *
-     * @access public
      * @param  string  $servername   Servername or IP-Address
      * @param  integer $port         Portnumber
      * @param  string  $sharedSecret Shared secret
@@ -312,7 +323,7 @@ class Auth_RADIUS extends PEAR {
      * @return bool  true on success, false on error
      * @see addServer()
      */      
-    function putServer($servername, $port = 0, $sharedsecret = 'testing123', $timeout = 3, $maxtries = 3) 
+    public function putServer($servername, $port = 0, $sharedsecret = 'testing123', $timeout = 3, $maxtries = 3)
     {
         if (!radius_add_server($this->res, $servername, $port, $sharedsecret, $timeout, $maxtries)) {
             return false;
@@ -323,11 +334,10 @@ class Auth_RADIUS extends PEAR {
     /**
      * Configures the radius library via external configurationfile
      *
-     * @access public
      * @param  string  $servername   Servername or IP-Address
      * @return bool  true on success, false on error
      */      
-    function putConfigfile($file) 
+    public function putConfigfile($file)
     {
         if (!radius_config($this->res, $file)) {
             return false;
@@ -338,10 +348,9 @@ class Auth_RADIUS extends PEAR {
     /**
      * Initiates a RADIUS request. 
      *
-     * @access public
      * @return bool  true on success, false on errors     
      */ 
-    function start()
+    public function start()
     {
         if (!$this->open()) {
             return false;
@@ -369,10 +378,9 @@ class Auth_RADIUS extends PEAR {
     /**
      * Sends a prepared RADIUS request and waits for a response
      *
-     * @access public
      * @return mixed  true on success, false on reject, PEAR_Error on error
      */ 
-    function send()
+    public function send()
     {
         $req = radius_send_request($this->res);
         if (!$req) {
@@ -410,10 +418,9 @@ class Auth_RADIUS extends PEAR {
      * NOTE: call this function also even if the request was rejected, because the 
      * Server returns usualy an errormessage
      *
-     * @access public
      * @return bool   true on success, false on error
      */     
-    function getAttributes()
+    public function getAttributes()
     {
 
         while ($attrib = radius_get_attr($this->res)) {
@@ -544,9 +551,8 @@ class Auth_RADIUS extends PEAR {
      * Calling this method is always a good idea, because all security relevant
      * attributes are filled with Nullbytes to leave nothing in the mem.
      *
-     * @access public
      */   
-    function close()
+    public function close()
     {
         if ($this->res != null) {
             radius_close($this->res);
@@ -575,9 +581,9 @@ class Auth_RADIUS_PAP extends Auth_RADIUS
      * @param  string  $password   Password
      * @return void
      */
-    function Auth_RADIUS_PAP($username = null, $password = null)
+    public function __construct($username = null, $password = null)
     {
-        $this->Auth_RADIUS();
+        parent::__construct();
         $this->username = $username;
         $this->password = $password;
     }
@@ -669,9 +675,9 @@ class Auth_RADIUS_CHAP_MD5 extends Auth_RADIUS_PAP
      * @param  integer $chapid     Requestnumber
      * @return void
      */
-    function Auth_RADIUS_CHAP_MD5($username = null, $challenge = null, $chapid = 1)
+    function __construct($username = null, $challenge = null, $chapid = 1)
     {
-        $this->Auth_RADIUS_PAP();
+        parent::__construct();
         $this->username = $username;
         $this->challenge = $challenge;
         $this->chapid = $chapid;
@@ -704,10 +710,8 @@ class Auth_RADIUS_CHAP_MD5 extends Auth_RADIUS_PAP
      *
      * Calling this method is always a good idea, because all security relevant
      * attributes are filled with Nullbytes to leave nothing in the mem.
-     *
-     * @access public
      */   
-    function close()
+    public function close()
     {
         Auth_RADIUS_PAP::close();
         $this->challenge =  str_repeat("\0", strlen($this->challenge));
@@ -876,9 +880,9 @@ class Auth_RADIUS_Acct extends Auth_RADIUS
      * Generates a predefined session_id. We use the Remote-Address, the PID, and the Current user.
      * @return void
      */
-    function Auth_RADIUS_Acct()
+    function __construct()
     {
-        $this->Auth_RADIUS();
+        parent::__construct();
         
         if (isset($_SERVER)) {
             $var = &$_SERVER;
@@ -978,8 +982,9 @@ class Auth_RADIUS_Acct_Stop extends Auth_RADIUS_Acct
     var $status_type = RADIUS_STOP;
 }
 
-if (!defined('RADIUS_UPDATE'))
+if (!defined('RADIUS_UPDATE')) {
     define('RADIUS_UPDATE', 3);
+}
 
 /**
  * class Auth_RADIUS_Acct_Update
@@ -997,5 +1002,3 @@ class Auth_RADIUS_Acct_Update extends Auth_RADIUS_Acct
      */
     var $status_type = RADIUS_UPDATE;
 }
-
-?>
