@@ -384,13 +384,13 @@ class Auth_RADIUS {
     {
         $req = radius_send_request($this->res);
         if (!$req) {
-            return $this->raiseError('Error sending request: ' . $this->getError());
+            throw new Auth_RADIUS_Exception('Error sending request: ' . $this->getError());
         }
 
         switch($req) {
         case RADIUS_ACCESS_ACCEPT:
             if (is_subclass_of($this, 'auth_radius_acct')) {
-                return $this->raiseError('RADIUS_ACCESS_ACCEPT is unexpected for accounting');
+                throw new Auth_RADIUS_Exception('RADIUS_ACCESS_ACCEPT is unexpected for accounting');
             }
             return true;
 
@@ -399,12 +399,12 @@ class Auth_RADIUS {
             
         case RADIUS_ACCOUNTING_RESPONSE:
             if (is_subclass_of($this, 'auth_radius_pap')) {
-                return $this->raiseError('RADIUS_ACCOUNTING_RESPONSE is unexpected for authentication');
+                throw new Auth_RADIUS_Exception('RADIUS_ACCOUNTING_RESPONSE is unexpected for authentication');
             }
             return true;
 
         default:
-            return $this->raiseError("Unexpected return value: $req");
+            throw new Exception("Unexpected return value: $req");
         }    
         
     }
@@ -1002,3 +1002,5 @@ class Auth_RADIUS_Acct_Update extends Auth_RADIUS_Acct
      */
     var $status_type = RADIUS_UPDATE;
 }
+
+class Auth_RADIUS_Exception extends Exception {}
