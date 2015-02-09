@@ -713,7 +713,7 @@ class Auth_RADIUS_CHAP_MD5 extends Auth_RADIUS_PAP
      */   
     public function close()
     {
-        Auth_RADIUS_PAP::close();
+        parent::close();
         $this->challenge =  str_repeat("\0", strlen($this->challenge));
         $this->response =  str_repeat("\0", strlen($this->response));
     }    
@@ -794,7 +794,7 @@ class Auth_RADIUS_MSCHAPv2 extends Auth_RADIUS_MSCHAPv1
      */
     var $peerChallenge = null;
 
-  /**
+    /**
      * Put MS-CHAPv2 specific attributes 
      *
      * For authenticating using MS-CHAPv1 via RADIUS you have to put the challenge 
@@ -834,7 +834,7 @@ class Auth_RADIUS_MSCHAPv2 extends Auth_RADIUS_MSCHAPv1
      */   
     function close()
     {
-        Auth_RADIUS_MSCHAPv1::close();
+        parent::close();
         $this->peerChallenge = str_repeat("\0", strlen($this->peerChallenge));
     }       
 }
